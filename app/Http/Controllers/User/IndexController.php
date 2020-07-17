@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\UserModel;
+use Illuminate\Support\Str;
 
 class IndexController extends Controller
 {
@@ -36,6 +37,7 @@ class IndexController extends Controller
 
 
         $data = [
+            'user_name' => Str::random(10),
             'email' => $request->post('email'),
             'password'  => $password
         ];
