@@ -69,8 +69,9 @@ class IndexController extends Controller
         {
             //将登录信息保存至session
             session(['uid'=>$u->user_id]);      //将uid写进session
+            echo "登录成功";
         }else{
-
+            echo "登录失败";
         }
     }
 

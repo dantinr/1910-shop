@@ -11,7 +11,6 @@ class TestController extends Controller
 
     public function test1()
     {
-        $data = DB::table('p_goods')->first();
-        var_dump($data);
+
     }
 }
