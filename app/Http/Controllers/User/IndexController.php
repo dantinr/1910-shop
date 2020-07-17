@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Model\UserModel;
+
+class IndexController extends Controller
+{
+    /**
+     * 注册页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function reg()
+    {
+        return view('user.reg');
+    }
+
+    /**
+     * 注册逻辑
+     */
+    public function regDo(Request $request)
+    {
+        echo '<pre>';print_r($_POST);echo '</pre>';
+
+
+        // TODO 验证密码是否一致
+
+        // TODO 检测Email是否存在
+
+        $pass = $request->post('pass1');
+
+        //生成密码
+        $password = password_hash($pass,PASSWORD_BCRYPT);
+
+
+        $data = [
+            'email' => $request->post('email'),
+            'password'  => $password
+        ];
+
+        //入库
+        $uid = UserModel::insertGetId($data);
+
+        var_dump($uid);
+
+    }
+
+
+    public function login(){
+        return view('user.login');
+    }
+
+    public function loginDo(Request $request){
+        //echo '<pre>';print_r($_POST);echo '</pre>';
+        //注册逻辑
+        $email = $request->post('email');
+        $pass = $request->post('pass');
+
+        //验证用户
+        $u = UserModel::where(['email'=>$email])->first();
+        //echo '<pre>';print_r($u->toArray());echo '</pre>';
+
+        //验证密码
+        if( password_verify($pass,$u->password) )
+        {
+            //将登录信息保存至session
+            session(['uid'=>$u->user_id]);      //将uid写进session
+        }else{
+
+        }
+    }
+
+    /**
+     * 个人中心
+     */
+    public function center()
+    {
+
+       if( session()->has('uid') )
+       {
+            echo "欢迎来到个人中心";
+       }else{
+           echo "请先登录";
+       }
+
+    }
+
+}
