@@ -89,4 +89,10 @@ class IndexController extends Controller
 
     }
 
+
+    public function lisi()
+    {
+        echo "我是lisi";
+    }
+
 }
