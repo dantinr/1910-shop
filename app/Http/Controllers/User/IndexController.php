@@ -89,4 +89,10 @@ class IndexController extends Controller
 
     }
 
+
+    public function zhangsan()
+    {
+        echo "我是张三";
+    }
+
 }
