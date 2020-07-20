@@ -23,8 +23,6 @@ class IndexController extends Controller
      */
     public function regDo(Request $request)
     {
-        echo '<pre>';print_r($_POST);echo '</pre>';
-
 
         // TODO 验证密码是否一致
 
@@ -45,7 +43,8 @@ class IndexController extends Controller
         //入库
         $uid = UserModel::insertGetId($data);
 
-        var_dump($uid);
+        //登录成功跳转
+        return redirect("/user/login");
 
     }
 
