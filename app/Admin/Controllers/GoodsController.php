@@ -35,7 +35,7 @@ class GoodsController extends AdminController
         $grid->column('shop_price', __('Shop price'));
         $grid->column('keywords', __('Keywords'));
         $grid->column('goods_desc', __('Goods desc'));
-        $grid->column('goods_img', __('Goods img'));
+        $grid->column('goods_img', __('Goods img'))->image();
         $grid->column('add_time', __('Add time'));
         $grid->column('is_delete', __('Is delete'));
         $grid->column('sale_num', __('Sale num'));
@@ -87,7 +87,7 @@ class GoodsController extends AdminController
         $form->decimal('shop_price', __('Shop price'))->default(0.00);
         $form->text('keywords', __('Keywords'));
         $form->textarea('goods_desc', __('Goods desc'));
-        $form->text('goods_img', __('Goods img'));
+        $form->image('goods_img', __('Goods img'));
         $form->number('add_time', __('Add time'));
         $form->switch('is_delete', __('Is delete'));
         $form->number('sale_num', __('Sale num'));

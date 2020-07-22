@@ -22,4 +22,9 @@ class TestController extends Controller
 
         Redis::hmset($key,$goods_info);
     }
+
+    public function test2()
+    {
+        
+    }
 }
