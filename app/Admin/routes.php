@@ -13,5 +13,6 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('category', CategoryController::class);       //分类管理
+    $router->resource('goods', GoodsController::class);      //商品管理
 
 });
