@@ -30,6 +30,9 @@ Route::get('/user/center','User\IndexController@center');            //用户中
 
 Route::get('/goods','Goods\IndexController@index');            //商品详情
 
+Route::get('/goods/view/rank','Goods\IndexController@viewRank');    //商品浏览排行榜
+
+
 
 
 
