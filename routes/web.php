@@ -33,6 +33,12 @@ Route::get('/goods','Goods\IndexController@index');            //商品详情
 Route::get('/goods/view/rank','Goods\IndexController@viewRank');    //商品浏览排行榜
 
 
+//计划任务
+Route::prefix('/cron')->group(function(){
+    Route::get('/codec','Cron\VideoCron@codec');            //定时转码
+});
+
+
 
 
 
