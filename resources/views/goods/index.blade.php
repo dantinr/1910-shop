@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="css/fakeLoader.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
+
 
     <link rel="shortcut icon" href="img/favicon.png">
 
@@ -250,128 +252,20 @@
 </div>
 <!-- end menu -->
 
-<!-- cart menu -->
-<div class="menus" id="animatedModal">
-    <div class="close-animatedModal close-icon">
-        <i class="fa fa-close"></i>
-    </div>
-    <div class="modal-content">
-        <div class="cart-menu">
-            <div class="container">
-                <div class="content">
-                    <div class="cart-1">
-                        <div class="row">
-                            <div class="col s5">
-                                <img src="img/cart-menu1.png" alt="">
-                            </div>
-                            <div class="col s7">
-                                <h5><a href="">Fashion Men's</a></h5>
-                            </div>
-                        </div>
-                        <div class="row quantity">
-                            <div class="col s5">
-                                <h5>Quantity</h5>
-                            </div>
-                            <div class="col s7">
-                                <input value="1" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s5">
-                                <h5>Price</h5>
-                            </div>
-                            <div class="col s7">
-                                <h5>$20</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s5">
-                                <h5>Action</h5>
-                            </div>
-                            <div class="col s7">
-                                <div class="action"><i class="fa fa-trash"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="cart-2">
-                        <div class="row">
-                            <div class="col s5">
-                                <img src="img/cart-menu2.png" alt="">
-                            </div>
-                            <div class="col s7">
-                                <h5><a href="">Fashion Men's</a></h5>
-                            </div>
-                        </div>
-                        <div class="row quantity">
-                            <div class="col s5">
-                                <h5>Quantity</h5>
-                            </div>
-                            <div class="col s7">
-                                <input value="1" type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s5">
-                                <h5>Price</h5>
-                            </div>
-                            <div class="col s7">
-                                <h5>$20</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s5">
-                                <h5>Action</h5>
-                            </div>
-                            <div class="col s7">
-                                <div class="action"><i class="fa fa-trash"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="total">
-                    <div class="row">
-                        <div class="col s7">
-                            <h5>Fashion Men's</h5>
-                        </div>
-                        <div class="col s5">
-                            <h5>$21.00</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s7">
-                            <h5>Fashion Men's</h5>
-                        </div>
-                        <div class="col s5">
-                            <h5>$21.00</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s7">
-                            <h6>Total</h6>
-                        </div>
-                        <div class="col s5">
-                            <h6>$41.00</h6>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn button-default">Process to Checkout</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end cart menu -->
-
 <!-- shop single -->
 <div class="pages section">
     <div class="container">
         <div class="shop-single">
             <img src="img/shop-single.png" alt="">
-            <h5>Fashion Men's</h5>
+            <h5>{{$goods['goods_name']}}</h5>
             <div class="price">$20 <span>$28</span></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam eaque in non delectus, error iste veniam commodi mollitia, officia possimus, repellendus maiores doloribus provident. Itaque, ab perferendis nemo tempore! Accusamus</p>
             <button type="button" class="btn button-default">ADD TO CART</button>
         </div>
+
+        <!-- 视频展示 开始 -->
+        <div class="prism-player" id="player-con"></div>
+        <!-- 视频展示 结束 -->
         <div class="review">
             <h5>1 reviews</h5>
             <div class="review-details">
@@ -449,6 +343,26 @@
 <script src="js/fakeLoader.min.js"></script>
 <script src="js/animatedModal.min.js"></script>
 <script src="js/main.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
+
+<script>
+    var player = new Aliplayer({
+            "id": "player-con",
+            "source": "/video/gg.m3u8",
+            "width": "50%",
+            "height": "400px",
+            "autoplay": true,
+            "isLive": false,
+            "rePlay": false,
+            "playsinline": true,
+            "preload": true,
+            "controlBarVisibility": "hover",
+            "useH5Prism": true
+        }, function (player) {
+            console.log("The player is created");
+        }
+    );
+</script>
 
 </body>
 </html>
