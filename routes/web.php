@@ -21,6 +21,9 @@ Route::get('/info', function () {
 
 Route::get('/test1','TestController@test1');
 
+
+Route::get('/','Index\IndexController@home');       //首页
+
 Route::get('/user/reg','User\IndexController@reg');            //注册
 Route::post('/user/reg','User\IndexController@regDo');            //注册
 
@@ -37,7 +40,6 @@ Route::get('/goods/view/rank','Goods\IndexController@viewRank');    //商品浏�
 Route::prefix('/cron')->group(function(){
     Route::get('/codec','Cron\VideoCron@codec');            //定时转码
 });
-
 
 
 

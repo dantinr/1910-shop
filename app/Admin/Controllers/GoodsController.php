@@ -25,6 +25,7 @@ class GoodsController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new GoodsModel());
+        $grid->model()->orderBy('goods_id','desc');
 
         $grid->column('goods_id', __('Goods id'));
         $grid->column('cat_id', __('Cat id'));
@@ -34,9 +35,9 @@ class GoodsController extends AdminController
         $grid->column('goods_number', __('Goods number'));
         $grid->column('shop_price', __('Shop price'));
         $grid->column('keywords', __('Keywords'));
-        $grid->column('goods_desc', __('Goods desc'));
+        //$grid->column('goods_desc', __('Goods desc'));
         $grid->column('goods_img', __('Goods img'))->image();
-        $grid->column('add_time', __('Add time'));
+        $grid->column('add_time', __('Add time'))->date('Y-m-d H:i:s');
         $grid->column('is_delete', __('Is delete'));
         $grid->column('sale_num', __('Sale num'));
 
