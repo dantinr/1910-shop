@@ -41,8 +41,7 @@ class VideoCron extends Controller
                 $cmd = "cd storage && ffmpeg -i {$video_file} -codec:v libx264 -codec:a mp3 -map 0 -f ssegment -segment_format mpegts -segment_list $m3u8_file -segment_time $ts_second $ts_file";
                 shell_exec($cmd);
 
-                $m3u8_file_path = 'video/'.$m3u8_file;
-                VideoModel::where(['goods_id'=>$goods_id])->update(['status'=>2,'m3u8'=>$m3u8_file_path]);  //更新转码状态为完成
+                VideoModel::where(['goods_id'=>$goods_id])->update(['status'=>2,'m3u8'=>$m3u8_file]);  //更新转码状态为完成
 
             }
         }

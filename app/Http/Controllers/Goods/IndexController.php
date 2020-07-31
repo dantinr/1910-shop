@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Goods;
 
 use App\Http\Controllers\Controller;
 use App\Model\GoodsModel;
+use App\Model\VideoModel;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -43,6 +44,15 @@ class IndexController extends Controller
             $goods_info = $g->toArray();
             Redis::hMset($key,$goods_info);            //缓存商品信息
             Redis::expire($key,600);                //缓存时间 10分钟
+        }
+
+        //获取视频信息
+        $v = VideoModel::where(['goods_id'=>$goods_id])->first();
+        if($v)
+        {
+            $goods_info['m3u8'] = $v->m3u8;
+        }else{
+            $goods_info['m3u8'] = "video/default.mp4";        //默认视频
         }
 
         //记录商品浏览量  商品浏览排行
