@@ -256,7 +256,7 @@
 <div class="pages section">
     <div class="container">
         <div class="shop-single">
-            <img src="img/shop-single.png" alt="">
+            <img src="/storage/{{$goods['goods_img']}}" alt="">
             <h5>{{$goods['goods_name']}}</h5>
             <div class="price">$20 <span>$28</span></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam eaque in non delectus, error iste veniam commodi mollitia, officia possimus, repellendus maiores doloribus provident. Itaque, ab perferendis nemo tempore! Accusamus</p>
@@ -348,7 +348,7 @@
 <script>
     var player = new Aliplayer({
             "id": "player-con",
-            "source": "/video/gg.m3u8",
+            "source": "{!! $goods['goods_img'] !!}}",
             "width": "50%",
             "height": "400px",
             "autoplay": true,

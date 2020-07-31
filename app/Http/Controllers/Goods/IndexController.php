@@ -53,6 +53,8 @@ class IndexController extends Controller
         $data = [
             'goods' => $goods_info
         ];
+
+        //echo '<pre>';print_r($data);echo '</pre>';
         return view('goods.index',$data);
 
 

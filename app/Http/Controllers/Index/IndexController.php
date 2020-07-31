@@ -12,7 +12,7 @@ class IndexController extends Controller
     public function home()
     {
         //获取最新10个商品
-        $goods = GoodsModel::select('goods_id','cat_id','goods_sn','goods_name','shop_price','goods_img')->orderBy('goods_id','desc')->limit(10)->get();
+        $goods = GoodsModel::select('goods_id','cat_id','goods_sn','goods_name','shop_price','goods_img')->orderBy('goods_id','desc')->limit(6)->get();
 
         foreach($goods as $k => &$v)
         {

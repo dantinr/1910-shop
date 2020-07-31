@@ -465,10 +465,10 @@
                 @foreach($goods as $k=>$v)
                 <div class="col s6">
                     <div class="content">
-                        <a href="/goods?id={{$v->goods_id}}" title="{{$v->goods_title}}">
+                        <a target="_blank" href="/goods?id={{$v->goods_id}}" title="{{$v->goods_title}}">
                             <img src="/storage/{{$v->goods_img}}" alt="">
                         </a>
-                        <h6><a title="{{$v->goods_title}}" href="/goods?id={{$v->goods_id}}">{{$v->goods_name}}</a></h6>
+                        <h6><a target="_blank" title="{{$v->goods_title}}" href="/goods?id={{$v->goods_id}}">{{$v->goods_name}}</a></h6>
                         <div class="price">
                             ¥ {{$v->shop_price}} <span>¥ {{$v->shop_price}}</span>
                         </div>
