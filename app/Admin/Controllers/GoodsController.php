@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Goods\Video;
 use App\Model\GoodsModel;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -40,6 +41,10 @@ class GoodsController extends AdminController
         $grid->column('add_time', __('Add time'))->date('Y-m-d H:i:s');
         $grid->column('is_delete', __('Is delete'));
         $grid->column('sale_num', __('Sale num'));
+
+        $grid->actions(function ($actions) {
+            $actions->add(new Video());
+        });
 
         return $grid;
     }

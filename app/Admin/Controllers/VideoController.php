@@ -65,7 +65,7 @@ class VideoController extends AdminController
     {
         $form = new Form(new VideoModel());
 
-        $form->text('goods_id', __('Goods id'));
+        $form->text('goods_id', __('Goods id'))->value(intval($_GET['id']));
         $form->file('path', __('Path'))->uniqueName()->move('video');
 
         return $form;
