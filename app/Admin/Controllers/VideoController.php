@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Request;
 
 class VideoController extends AdminController
 {
@@ -63,10 +64,18 @@ class VideoController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new VideoModel());
 
-        $form->text('goods_id', __('Goods id'))->value(intval($_GET['id']));
+        $goods_id = isset($_GET['id']) ? intval($_GET['id']) : null;
+        $form = new Form(new VideoModel());
+        $form->text('goods_id', __('Goods id'))->value($goods_id);
         $form->file('path', __('Path'))->uniqueName()->move('video');
+
+//        if($goods_id)
+//        {
+//            $form->saved(function(){
+//                return redirect('/admin/goods');        //文件保存成功后页面跳转
+//            });
+//        }
 
         return $form;
     }
