@@ -11,16 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/info', function () {
-    phpinfo();
-});
-
-
 Route::get('/test1','TestController@test1');
-
 
 Route::get('/','Index\IndexController@home');       //首页
 
@@ -34,6 +25,13 @@ Route::get('/user/center','User\IndexController@center');            //用户中
 Route::get('/goods','Goods\IndexController@index');            //商品详情
 
 Route::get('/goods/view/rank','Goods\IndexController@viewRank');    //商品浏览排行榜
+
+//购物车
+Route::prefix('/cart',function(){
+    Route::get('/index','Cart\IndexController@index');          //购物车页面
+    Route::get('/add','Cart\IndexController@add');              //添加
+    Route::get('/del','Cart\IndexController@del');              //删除
+});
 
 
 //计划任务
