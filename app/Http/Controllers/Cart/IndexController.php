@@ -21,9 +21,14 @@ class IndexController extends Controller
     /**
      * 添加
      */
-    public function add()
+    public function add(Request $request)
     {
-
+        $goods_id = intval($request->get('id'));
+        $response = [
+            'errno' => 0,
+            'msg'   => 'ok'
+        ];
+        return $response;
     }
 
     /**
