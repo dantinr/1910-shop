@@ -33,6 +33,8 @@
 @section('footerjs')
 <!-- scripts -->
 <script src="/js/jquery.min.js"></script>
+<script src="/js/js.cookie-2.2.1.min.js"></script>
+<script src="/js/init.js"></script>
 <script src="/js/materialize.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <script src="/js/fakeLoader.min.js"></script>
