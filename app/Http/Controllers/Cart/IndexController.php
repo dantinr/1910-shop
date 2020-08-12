@@ -73,6 +73,8 @@ class IndexController extends Controller
             ];
         }
 
+        // TODO 判断商品是否下架 已删除
+
 
         $uuid = $_COOKIE['uuid'];           //获取客户端标识
         $redis_cart_ss1 = 'ss:cart:goods:'.$uuid;     //商品

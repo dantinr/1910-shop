@@ -11,7 +11,6 @@ function randomStr(len) {
 }
 
 var uuid = Cookies.get('uuid')      // https://github.com/js-cookie/js-cookie
-console.log(uuid);
 
 //生成客户端唯一标识
 if(uuid == undefined){
