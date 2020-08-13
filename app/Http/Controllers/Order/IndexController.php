@@ -24,9 +24,7 @@ class IndexController extends Controller
             return view('cart.empty');
         }
 
-        echo '<pre>';print_r($cart_goods);echo '</pre>';
-
-        //TODO 判断库存
+        // TODO 判断库存
 
         //计算订单价格  商品个数X商品单价
         $total = 0;     //订单总价
@@ -60,14 +58,14 @@ class IndexController extends Controller
             $g['goods_number'] = $v;        //购买数量
             $g['order_id'] = $oid;        //订单ID
 
-            echo OrderGoodsModel::insertGetId($g);echo '</br>';
+            OrderGoodsModel::insertGetId($g);echo '</br>';
         }
 
         //生成订单后清空购物车
         CartModel::clear();
 
         //跳转支付
-        $redirect = '/pay/index?oid='.$oid;
+        $redirect = '/pay/checkout?oid='.$oid;
         return redirect($redirect);
     }
 }

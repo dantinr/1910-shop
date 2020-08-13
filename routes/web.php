@@ -45,7 +45,11 @@ Route::get('/top10','Goods\RankController@index');          //排行榜
 
 //支付
 Route::prefix('/pay')->group(function(){
-    Route::get('/index','Pay\IndexController@index');           //支付页面
+    Route::get('/checkout','Pay\IndexController@checkout');           //支付页面
+    Route::post('/create','Pay\IndexController@create');               //确定支付
+
+    Route::get('/alireturn','Pay\IndexController@aliReturn');         //支付宝同步通知
+    Route::get('/alinotify','Pay\IndexController@aliNotify');         //支付宝异步通知
 });
 
 //计划任务
