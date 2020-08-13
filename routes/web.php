@@ -36,6 +36,7 @@ Route::prefix('/cart')->group(function(){
     Route::get('/del','Cart\IndexController@del');              //删除
 });
 
+Route::get('/top10','Goods\RankController@index');          //排行榜
 
 //计划任务
 Route::prefix('/cron')->group(function(){
