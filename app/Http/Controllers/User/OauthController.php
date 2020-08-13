@@ -57,7 +57,7 @@ class OauthController extends Controller
         $client = new Client();
         $response = $client->request('GET',$url,[
             'headers'   => [
-                'Authorization' => $token . ' OAUTH-TOKEN'
+                'Authorization' => "token $token"
             ]
         ]);
         echo $response->getBody();
