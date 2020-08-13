@@ -34,7 +34,7 @@
         </ul>
     </div>
     <!-- end side nav right-->
-    
+
     <!-- menu -->
     <div class="menus" id="animatedModal2">
         <div class="close-animatedModal2 close-icon">
@@ -398,7 +398,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn button-default">Process to Checkout</button>
+            <a href="/order/create" class="btn button-default">提交订单</a>
         </div>
     </div>
     <!-- end cart -->

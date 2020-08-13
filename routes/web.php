@@ -36,7 +36,17 @@ Route::prefix('/cart')->group(function(){
     Route::get('/del','Cart\IndexController@del');              //删除
 });
 
+//订单
+Route::prefix('/order')->group(function(){
+    Route::get('/create','Order\IndexController@create');      //生成订单
+});
+
 Route::get('/top10','Goods\RankController@index');          //排行榜
+
+//支付
+Route::prefix('/pay')->group(function(){
+    Route::get('/index','Pay\IndexController@index');           //支付页面
+});
 
 //计划任务
 Route::prefix('/cron')->group(function(){
