@@ -136,7 +136,7 @@ class IndexController extends Controller
      */
     public function aliReturn()
     {
-        echo '<pre>';print_r($_GET);echo '</pre>';
+        echo "订单： ". $_GET['out_trade_no'] . "支付成功,页面正在跳转";
     }
 
 }
