@@ -2,6 +2,7 @@
 
 @section('header')
     @parent
+    <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
 @endsection
 
 @section('body')
