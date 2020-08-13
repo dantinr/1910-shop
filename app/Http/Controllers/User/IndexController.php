@@ -89,16 +89,15 @@ class IndexController extends Controller
 
     }
 
-
-
-    public function zhangsan()
+    /**
+     * github 登录跳转
+     * 2020年8月13日17:45:51
+     */
+    public function githubLogin()
     {
-        echo "我是张三";
+        $url = 'https://github.com/login/oauth/authorize?client_id=6e13199138142849c493&redirect_uri=https://1910liwei.comcto.com/oauth/github';
+        return redirect($url);
     }
 
-    public function lisi()
-    {
-        echo "我是lisi";
-    }
 
 }
