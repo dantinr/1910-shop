@@ -94,4 +94,41 @@ class IndexController extends Controller
 
     }
 
+    /**
+     * 收藏商品
+     */
+    public function fav(Request $request)
+    {
+        $uid = 8888;
+        $goods_id = $request->get('id',0);                //商品ID
+
+        //判断商品是否存在
+        $g = GoodsModel::find($goods_id);
+        if(empty($goods_id) || empty($g)){
+            $response = [
+                'errno' => 300001,
+                'msg'   => '已收藏',
+            ];
+            return $response;
+        }
+
+        $redis_fav_key = 'ss:fav_goods:'.$uid;              //redis 用户收藏有序集合
+        //判断是否已收藏
+        if(Redis::zScore($redis_fav_key,$goods_id))
+        {
+            $response = [
+                'errno' => 300002,
+                'msg'   => '已收藏',
+            ];
+        }else{
+            Redis::zAdd($redis_fav_key,time(),$goods_id);
+            $response = [
+                'errno' => 0,
+                'msg'   => 'ok',
+            ];
+        }
+
+        return $response;
+    }
+
 }

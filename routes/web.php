@@ -31,6 +31,12 @@ Route::get('/goods','Goods\IndexController@index');            //商品详情
 
 Route::get('/goods/view/rank','Goods\IndexController@viewRank');    //商品浏览排行榜
 
+//商品
+Route::prefix('/goods')->group(function(){
+    Route::get('/fav','Goods\IndexController@fav');     //收藏商品
+});
+
+
 //购物车
 Route::prefix('/cart')->group(function(){
     Route::get('/index','Cart\IndexController@index');          //购物车页面

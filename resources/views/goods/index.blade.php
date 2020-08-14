@@ -241,6 +241,7 @@
                 <div class="price">$20 <span>$28</span></div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam eaque in non delectus, error iste veniam commodi mollitia, officia possimus, repellendus maiores doloribus provident. Itaque, ab perferendis nemo tempore! Accusamus</p>
                 <button type="button" data-gid="{{$goods['goods_id']}}" class="btn button-default" id="cart_add">加入购物车</button>
+                <button type="button" data-gid="{{$goods['goods_id']}}" class="btn button-default" id="fav">收藏</button>
             </div>
 
             <!-- 视频展示 开始 -->
@@ -339,5 +340,19 @@
                 console.log("The player is created");
             }
         );
+    </script>
+    {{--  收藏   --}}
+    <script>
+        $("#fav").on('click',function(){
+            console.log($(this).attr('data-gid'));
+            $.ajax({
+                url: "/goods/fav",
+                type: "get",
+                dataType: 'json',
+                success: function(d){
+                    console.log(d);
+                }
+            });
+        });
     </script>
 @endsection
