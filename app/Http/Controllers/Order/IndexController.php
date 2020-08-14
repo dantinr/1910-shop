@@ -16,7 +16,14 @@ class IndexController extends Controller
      */
     public function create()
     {
-        $uid = 8888;                    //获取用户uid
+        if($_SERVER['uid']==0)      // 未登录
+        {
+            header('Refresh:2;url=/user/login');
+            echo "请先登录,正在跳转";
+            die;
+        }
+
+        $uid = $_SERVER['uid'];                    //获取用户uid
         //获取购物车商品
         $cart_goods = CartModel::goods();
         if(empty($cart_goods))      //空购物车

@@ -63,7 +63,7 @@ class OauthController extends Controller
         }
 
         //将 token 返回给客户端
-        Cookie::queue('token',$token,120,'/');      //120分钟
+        Cookie::queue('token',$this->token,120,'/');      //120分钟
         return redirect('/');       //登录成功 返回首页
 
     }
