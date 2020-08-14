@@ -131,6 +131,12 @@ class IndexController extends Controller
                 'errno' => 0,
                 'msg'   => '收藏成功',
             ];
+
+            //加入收藏排行榜
+            $redis_goods_fav_list_key = 'ss:fav_goods_rank';
+            Redis::zIncrBy($redis_goods_fav_list_key,1,$goods_id);
+
+
         }
 
         return $response;
