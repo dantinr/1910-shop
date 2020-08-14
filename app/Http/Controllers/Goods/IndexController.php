@@ -12,17 +12,20 @@ use Illuminate\Support\Facades\Redis;
 class IndexController extends Controller
 {
 
+
     /**
      * 商品详情页
      */
     public function index(Request $request)
     {
 
-
+        $uid = 8888;
         $goods_id = $request->get('id');
+
+        $redis_fav_key = 'ss:fav_goods:'.$uid;      //商品收藏有序集合
+
         //判断是否缓存
         $key = 'h:goods_info:'.$goods_id;       //商品hash key
-
         $goods_info = Redis::hgetAll($key);
 
         if($goods_info)         //TODO 有缓存
@@ -59,12 +62,14 @@ class IndexController extends Controller
         $redis_key = 'ss:goods_view:count';         //商品浏览排行 Sorted Sets
         Redis::zIncrBy($redis_key,1,$goods_id);
 
+        //判断商品是否已收藏
+        $fav = intval(Redis::zScore($redis_fav_key,$goods_id));     // 0 未收藏 1已收藏
+        $goods_info['fav'] = $fav;
 
         $data = [
             'goods' => $goods_info
         ];
 
-        //echo '<pre>';print_r($data);echo '</pre>';
         return view('goods.index',$data);
 
 
@@ -107,7 +112,7 @@ class IndexController extends Controller
         if(empty($goods_id) || empty($g)){
             $response = [
                 'errno' => 300001,
-                'msg'   => '已收藏',
+                'msg'   => '收藏失败，请检查商品信息',
             ];
             return $response;
         }
@@ -124,7 +129,7 @@ class IndexController extends Controller
             Redis::zAdd($redis_fav_key,time(),$goods_id);
             $response = [
                 'errno' => 0,
-                'msg'   => 'ok',
+                'msg'   => '收藏成功',
             ];
         }
 
