@@ -13,7 +13,7 @@
 
 Route::get('/test2','TestController@test2');
 
-Route::get('/','Index\IndexController@home')->middleware('check.login');       //首页
+Route::get('/','Index\IndexController@home');       //首页
 
 Route::get('/user/reg','User\IndexController@reg');            //注册
 Route::post('/user/reg','User\IndexController@regDo');            //注册

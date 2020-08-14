@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Illuminate\Session\Middleware\StartSession::class,
+        CheckLogin::class,          //验证登录
     ];
 
     /**
@@ -68,7 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check.pri' => CheckPri::class,     //鉴权中间件
         'access.filter' => AccessFilter::class,       //防刷中间件
-        'check.login'=> CheckLogin::class,          // 验证登录
     ];
 
     /**

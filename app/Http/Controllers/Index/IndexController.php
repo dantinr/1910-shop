@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Index;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\GoodsModel;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 
 class IndexController extends Controller

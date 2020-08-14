@@ -16,14 +16,14 @@ class IndexController extends Controller
      */
     public function create()
     {
-        if($_SERVER['uid']==0)      // 未登录
+
+        if( $_SERVER['uid']==0 )      // 未登录
         {
             header('Refresh:2;url=/user/login');
             echo "请先登录,正在跳转";
             die;
         }
 
-        $uid = $_SERVER['uid'];                    //获取用户uid
         //获取购物车商品
         $cart_goods = CartModel::goods();
         if(empty($cart_goods))      //空购物车
@@ -43,11 +43,11 @@ class IndexController extends Controller
         }
 
         //订单入库，订单商品入库
-        $order_sn = OrderModel::generateOrderSN($uid);
+        $order_sn = OrderModel::generateOrderSN($_SERVER['uid']);
 
         $order_info = [
             'order_sn'      => $order_sn,
-            'user_id'       => $uid,
+            'user_id'       => $_SERVER['uid'],
             'pay_status'    => 0,           //未支付
             'order_amount'  => $total,      //订单总金额
             'add_time'      => time(),      //订单创建时间
@@ -65,7 +65,7 @@ class IndexController extends Controller
             $g['goods_number'] = $v;        //购买数量
             $g['order_id'] = $oid;        //订单ID
 
-            OrderGoodsModel::insertGetId($g);echo '</br>';
+            OrderGoodsModel::insertGetId($g);
         }
 
         //生成订单后清空购物车
