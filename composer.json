@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "alibabacloud/smsintl": "^1.8",
         "encore/laravel-admin": "^1.8",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.0",
