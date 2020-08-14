@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use DB;
 use GuzzleHttp\Client;
+use Illuminate\Support\Str;
 
 class TestController extends Controller
 {
@@ -29,6 +31,14 @@ class TestController extends Controller
 
     public function test2()
     {
-
+        $uid = 8888;
+        $token =  $uid . Str::random(5) . time() . mt_rand(1111,9999999);
+        $token = strtoupper(substr(Str::random(5) . md5($token),1,20));
+        echo $token;die;
+        $new_user = [
+            'user_name' => Str::random(10)
+        ];
+        $uid = UserModel::insertGetId($new_user);
+        var_dump($uid);
     }
 }

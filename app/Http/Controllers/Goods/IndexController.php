@@ -19,11 +19,9 @@ class IndexController extends Controller
     public function index(Request $request)
     {
 
-        $uid = 8888;
+        $uid = session()->get('uid');       // null or uid
         $goods_id = $request->get('id');
-
         $redis_fav_key = 'ss:fav_goods:'.$uid;      //商品收藏有序集合
-
         //判断是否缓存
         $key = 'h:goods_info:'.$goods_id;       //商品hash key
         $goods_info = Redis::hgetAll($key);
@@ -104,6 +102,9 @@ class IndexController extends Controller
      */
     public function fav(Request $request)
     {
+
+        //判断登录 (可在中间件中做)
+
         $uid = 8888;
         $goods_id = $request->get('id',0);                //商品ID
 

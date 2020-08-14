@@ -95,7 +95,7 @@ class IndexController extends Controller
      */
     public function githubLogin()
     {
-        $url = 'https://github.com/login/oauth/authorize?client_id=6e13199138142849c493&redirect_uri=https://1910liwei.comcto.com/oauth/github';
+        $url = 'https://github.com/login/oauth/authorize?client_id='.env('OAUTH_GITHUB_ID').'&redirect_uri='.env('APP_URL').'/oauth/github';
         return redirect($url);
     }
 
