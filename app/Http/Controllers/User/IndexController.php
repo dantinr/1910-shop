@@ -50,7 +50,16 @@ class IndexController extends Controller
 
 
     public function login(){
-        return view('user.login');
+        if($_SERVER['uid']>0)       //已登录
+        {
+            $data = [
+                'msg'       => '已登录，正在跳转',
+                'redirect'  => '/',         //默认跳转至首页
+            ];
+            return view('302',$data);
+        }else{
+            return view('user.login');
+        }
     }
 
     public function loginDo(Request $request){
