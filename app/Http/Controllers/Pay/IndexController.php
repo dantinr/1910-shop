@@ -61,7 +61,7 @@ class IndexController extends Controller
 
         // 1 请求参数
         $param2 = [
-            'out_trade_no'      => $o->order_sn,     //商户订单号
+            'out_trade_no'      => $o->$order_id,     //商户订单号
             'product_code'      => 'FAST_INSTANT_TRADE_PAY',
             'total_amount'      => $o->order_amount,    //订单总金额
             'subject'           => 'Mstore-测试订单-'.Str::random(16),
@@ -129,9 +129,39 @@ class IndexController extends Controller
      */
     public function aliNotify()
     {
-        //记录日志
-        $data = json_encode($_POST);
+        $data = $_POST;
         Log::channel('alipay')->info($data);
+
+        if( $this->checkSign($data)==0 )     //验签失败
+        {
+            // TODO 处理失败情况
+        }else{
+            //判断交易状态  trade_status
+            if($data['trade_status']=='TRADE_SUCCESS')
+            {
+                //判断订单支付状态 如果未支付 更新为支付状态 记录支付时间 支付金额
+                $order_id = $data['out_trade_no'];
+                $o = OrderModel::find($order_id);
+
+                if($o->pay_status==0)       //未支付  已支付过无需处理
+                {
+                    $update = [
+                        'pay_type'      => 1,                               // 1支付宝 2微信
+                        'pay_status'    => 1,                               // 0未支付 1已支付
+                        'pay_time'      => time(),                          // 支付时间
+                        'pay_fee'       => $data['buyer_pay_amount'],       //用户支付的金额
+                        'plat_oid'      => $data['trade_no'],               // 支付宝订单号
+                    ];
+
+                    OrderModel::where(['order_id'=>$order_id])->update($update);
+                }
+
+            }
+        }
+
+        //响应支付宝状态  success
+        echo "success";
+
     }
 
     /**
@@ -143,6 +173,34 @@ class IndexController extends Controller
             'msg'   => "订单： ". $_GET['out_trade_no'] . "支付成功"
         ];
         return view('ok',$data);
+    }
+
+
+    /**
+     * 支付宝验签
+     * @param $str
+     */
+    public function checkSign($data)
+    {
+
+        $sign = $data['sign'];
+        unset($data['sign']);
+        unset($data['sign_type']);
+
+        // 计算签名
+        ksort($data);
+
+        $str = "";
+        foreach($data as $k=>$v)
+        {
+            $str .= $k . '=' . $v . '&';
+        }
+        $str = rtrim($str,'&');     // 拼接待签名的字符串
+
+        $priKey = file_get_contents(storage_path('keys/ali_pub.key'));
+        $pub_id = openssl_get_publickey($priKey);
+        return openssl_verify($str,base64_decode($sign),$pub_id,OPENSSL_ALGO_SHA256);
+
     }
 
 }
