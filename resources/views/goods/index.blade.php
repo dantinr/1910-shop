@@ -3,6 +3,7 @@
 @section('header')
     @parent
     <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-message-box@3.2.2/dist/messagebox.min.css">
 @endsection
 
 @section('body')
@@ -325,6 +326,7 @@
 
 @section('footerjs')
     @parent
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-message-box@3.2.2/dist/messagebox.min.js"></script>
     <script src="/js/cart.js"></script>
     <script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
 
@@ -355,7 +357,7 @@
                 type: "get",
                 dataType: 'json',
                 success: function(d){
-                    alert(d.msg);
+                    $.MessageBox("收藏成功");
                     $("#fav").text("已收藏")
                 }
             });

@@ -8,7 +8,7 @@ $("#cart_add").click(function(e){
             console.log(d);
             if(d.errno==0)
             {
-                alert("已加入购物车");
+                $.MessageBox("已加入购物车");
             }
         }
     });
