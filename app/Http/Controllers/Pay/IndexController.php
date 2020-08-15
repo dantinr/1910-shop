@@ -139,7 +139,10 @@ class IndexController extends Controller
      */
     public function aliReturn()
     {
-        echo "订单： ". $_GET['out_trade_no'] . "支付成功,页面正在跳转";
+        $data = [
+            'msg'   => "订单： ". $_GET['out_trade_no'] . "支付成功"
+        ];
+        return view('ok',$data);
     }
 
 }
