@@ -54,7 +54,7 @@ Route::prefix('/pay')->group(function(){
     Route::post('/create','Pay\IndexController@create');               //确定支付
 
     Route::get('/alireturn','Pay\IndexController@aliReturn');         //支付宝同步通知
-    Route::get('/alinotify','Pay\IndexController@aliNotify');         //支付宝异步通知
+    Route::post('/alinotify','Pay\IndexController@aliNotify');         //支付宝异步通知
 });
 
 //计划任务

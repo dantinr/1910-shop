@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\OrderModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class IndexController extends Controller
 {
@@ -128,7 +129,9 @@ class IndexController extends Controller
      */
     public function aliNotify()
     {
-
+        //记录日志
+        $data = json_encode($_POST);
+        Log::channel('alipay')->info($data);
     }
 
     /**
