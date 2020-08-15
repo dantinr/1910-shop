@@ -29,61 +29,28 @@ class OrderController extends AdminController
 
         $grid->column('order_id', __('Order id'));
         $grid->column('order_sn', __('Order sn'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('order_status', __('Order status'));
-        $grid->column('shipping_status', __('Shipping status'));
-        $grid->column('pay_status', __('Pay status'));
-        $grid->column('consignee', __('Consignee'));
-        $grid->column('country', __('Country'));
-        $grid->column('province', __('Province'));
-        $grid->column('city', __('City'));
-        $grid->column('district', __('District'));
-        $grid->column('best_time', __('Best time'));
-        $grid->column('postscript', __('Postscript'));
-        $grid->column('shipping_id', __('Shipping id'));
-        $grid->column('shipping_name', __('Shipping name'));
-        $grid->column('pay_id', __('Pay id'));
-        $grid->column('pay_name', __('Pay name'));
-        $grid->column('how_oos', __('How oos'));
-        $grid->column('how_surplus', __('How surplus'));
-        $grid->column('pack_name', __('Pack name'));
-        $grid->column('card_name', __('Card name'));
-        $grid->column('card_message', __('Card message'));
-        $grid->column('inv_payee', __('Inv payee'));
-        $grid->column('inv_content', __('Inv content'));
-        $grid->column('goods_amount', __('Goods amount'));
-        $grid->column('shipping_fee', __('Shipping fee'));
-        $grid->column('insure_fee', __('Insure fee'));
-        $grid->column('pay_fee', __('Pay fee'));
-        $grid->column('pack_fee', __('Pack fee'));
-        $grid->column('card_fee', __('Card fee'));
-        $grid->column('money_paid', __('Money paid'));
-        $grid->column('surplus', __('Surplus'));
-        $grid->column('integral', __('Integral'));
-        $grid->column('integral_money', __('Integral money'));
-        $grid->column('bonus', __('Bonus'));
-        $grid->column('order_amount', __('Order amount'));
-        $grid->column('from_ad', __('From ad'));
-        $grid->column('referer', __('Referer'));
-        $grid->column('add_time', __('Add time'));
-        $grid->column('confirm_time', __('Confirm time'));
-        $grid->column('pay_time', __('Pay time'));
-        $grid->column('shipping_time', __('Shipping time'));
-        $grid->column('pack_id', __('Pack id'));
-        $grid->column('card_id', __('Card id'));
-        $grid->column('bonus_id', __('Bonus id'));
-        $grid->column('invoice_no', __('Invoice no'));
-        $grid->column('extension_code', __('Extension code'));
-        $grid->column('extension_id', __('Extension id'));
-        $grid->column('to_buyer', __('To buyer'));
-        $grid->column('pay_note', __('Pay note'));
-        $grid->column('agency_id', __('Agency id'));
-        $grid->column('inv_type', __('Inv type'));
-        $grid->column('tax', __('Tax'));
-        $grid->column('is_separate', __('Is separate'));
-        $grid->column('parent_id', __('Parent id'));
-        $grid->column('discount', __('Discount'));
-        $grid->column('order_type', __('Order type'));
+        $grid->column('user_id', __('用户ID'));
+        $grid->column('pay_status', __('支付状态'));
+        $grid->column('money_paid', __('支付金额'));
+        $grid->column('order_amount', __('订单金额'));
+        $grid->column('add_time', __('下单时间'))->display(function($time){
+            return date('Y-m-d H:i:s',$time);
+        });
+        $grid->column('pay_time', __('支付时间'))->display(function($time){
+            return date('Y-m-d H:i:s',$time);
+        });
+        $grid->column('pay_type', __('支付类型'))->display(function($type){
+            switch($type)
+            {
+                case 1:
+                    return '<span style="color: blue">支付宝</span>';
+                case 2:
+                    return '<span style="color: green">微信</span>';
+                default:
+                    return '<span style="color: red">未支付</span>';
+            }
+        });
+        $grid->column('plat_oid', __('平台订单号'));
 
         return $grid;
     }

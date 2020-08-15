@@ -149,7 +149,7 @@ class IndexController extends Controller
                         'pay_type'      => 1,                               // 1支付宝 2微信
                         'pay_status'    => 1,                               // 0未支付 1已支付
                         'pay_time'      => time(),                          // 支付时间
-                        'pay_fee'       => $data['buyer_pay_amount'],       //用户支付的金额
+                        'money_paid'       => $data['buyer_pay_amount'],    //用户支付的金额
                         'plat_oid'      => $data['trade_no'],               // 支付宝订单号
                     ];
 
