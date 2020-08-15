@@ -61,7 +61,7 @@ class IndexController extends Controller
 
         // 1 请求参数
         $param2 = [
-            'out_trade_no'      => $o->$order_id,     //商户订单号
+            'out_trade_no'      => $o->order_id,     //商户订单号
             'product_code'      => 'FAST_INSTANT_TRADE_PAY',
             'total_amount'      => $o->order_amount,    //订单总金额
             'subject'           => 'Mstore-测试订单-'.Str::random(16),
