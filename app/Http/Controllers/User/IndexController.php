@@ -24,28 +24,36 @@ class IndexController extends Controller
     public function regDo(Request $request)
     {
 
+        $user_name = $request->post('user_name');
+        $user_email = $request->post('user_email');
+        $pass1 = $request->post('user_pass1');       //密码
+        $pass2 = $request->post('user_pass2');       //确认密码
+
         // TODO 验证密码是否一致
 
         // TODO 检测Email是否存在
 
-        $pass = $request->post('pass1');
-
+        // TODO 验证用户名是否存在
+        
         //生成密码
-        $password = password_hash($pass,PASSWORD_BCRYPT);
-
+        $password = password_hash($pass1,PASSWORD_BCRYPT);
 
         $data = [
-            'user_name' => Str::random(10),
-            'email' => $request->post('email'),
+            'user_name' => $user_name,
+            'email'     => $user_email,
             'password'  => $password
         ];
 
         //入库
         $uid = UserModel::insertGetId($data);
 
-        //登录成功跳转
-        return redirect("/user/login");
+        //登录成功跳转至登录页面 或 跳转至个人中心
+        $data = [
+            'redirect'  => '/user/login',
+            'msg'       => "注册成功，正在跳转至登录页面"
+        ];
 
+        return view('302',$data);
     }
 
 
@@ -62,6 +70,10 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * 网站登录
+     * @param Request $request
+     */
     public function loginDo(Request $request){
         //echo '<pre>';print_r($_POST);echo '</pre>';
         //注册逻辑
