@@ -79,14 +79,21 @@ class IndexController extends Controller
      * @param Request $request
      */
     public function loginDo(Request $request){
-        //echo '<pre>';print_r($_POST);echo '</pre>';
-        //注册逻辑
-        $email = $request->post('email');
+
+        $info = $request->post('email');       //用户可输入 用户名 或 Email 或 手机号
         $pass = $request->post('pass');
 
         //用户名 Email 登录
-        $u = UserModel::where(['email'=>$email])->orWhere(['user_name'=>$email])->first();
-        //echo '<pre>';print_r($u->toArray());echo '</pre>';
+        $u = UserModel::where(['email'=>$info])->orWhere(['user_name'=>$info])->first();
+        //用户不存在
+        if(empty($u))
+        {
+            $data = [
+                'redirect'  => '/user/login',
+                'msg'       => "用户名或密码不正确，请重新登录"
+            ];
+            return view('302',$data);
+        }
 
         //验证密码
         if( password_verify($pass,$u->password) )
@@ -99,7 +106,7 @@ class IndexController extends Controller
                 'redirect'  => '/',
                 'msg'       => "登录成功，正在跳转"
             ];
-            
+
             return view('302',$data);
         }else{
             $data = [

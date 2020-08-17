@@ -46,7 +46,7 @@
                     <form action="/user/login" method="post" class="col s12">
                         {{csrf_field()}}
                         <div class="input-field">
-                            <input name="email" type="text" class="validate" placeholder="USERNAME" required>
+                            <input name="info" type="text" class="validate" placeholder="USERNAME" required>
                         </div>
                         <div class="input-field">
                             <input name="pass" type="password" class="validate" placeholder="PASSWORD" required>
