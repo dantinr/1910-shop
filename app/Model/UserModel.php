@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 
@@ -44,6 +45,23 @@ class UserModel extends Model
         session(['uid'=>$uid]);
 
         return $token;
+    }
+
+    /**
+     * 用户退出 清空登录信息 redis cookie session  参看 webLogin方法
+     * @param $uid
+     */
+    public static function webLogOut()
+    {
+        $token = Cookie::get('token');
+
+        //删除rediskey
+        $token_key = 'h:login_info:'.$token;
+        Redis::del($token_key);
+
+        //清session
+        session()->flush();
+
     }
 
 }

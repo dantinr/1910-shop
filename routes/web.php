@@ -20,6 +20,7 @@ Route::post('/user/reg','User\IndexController@regDo');            //注册
 
 Route::get('/user/login','User\IndexController@login');            //注册
 Route::post('/user/login','User\IndexController@loginDo');            //注册
+Route::get('/user/logout','User\IndexController@logOut');            //用户退出
 Route::get('/user/login/github','User\IndexController@githubLogin'); //github登录跳转
 Route::get('/oauth/github','User\OauthController@github');           //github授权回跳地址
 Route::get('/user/center','User\IndexController@center');            //用户中心

@@ -142,5 +142,26 @@ class IndexController extends Controller
         return redirect($url);
     }
 
+    /**
+     * 用户退出
+     * 2020年8月17日14:46:35
+     */
+    public function logOut()
+    {
+        //判断登录状态
+        if( $_SERVER['uid'] )
+        {
+            UserModel::webLogOut();
+        }
+
+        $data = [
+            'redirect'  => '/',
+            'msg'       => '已退出登录，正在跳转'
+        ];
+        return view('302',$data);
+
+
+    }
+
 
 }
