@@ -80,7 +80,7 @@ class IndexController extends Controller
      */
     public function loginDo(Request $request){
 
-        $info = $request->post('email');       //用户可输入 用户名 或 Email 或 手机号
+        $info = $request->post('info');       //用户可输入 用户名 或 Email 或 手机号
         $pass = $request->post('pass');
 
         //用户名 Email 登录
