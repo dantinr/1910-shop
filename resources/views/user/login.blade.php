@@ -43,15 +43,17 @@
             </div>
             <div class="login">
                 <div class="row">
-                    <form class="col s12">
+                    <form action="/user/login" method="post" class="col s12">
+                        {{csrf_field()}}
                         <div class="input-field">
-                            <input type="text" class="validate" placeholder="USERNAME" required>
+                            <input name="email" type="text" class="validate" placeholder="USERNAME" required>
                         </div>
                         <div class="input-field">
-                            <input type="password" class="validate" placeholder="PASSWORD" required>
+                            <input name="pass" type="password" class="validate" placeholder="PASSWORD" required>
                         </div>
                         <a href=""><h6>Forgot Password ?</h6></a>
-                        <a href="" class="btn button-default">LOGIN</a>
+                        <br>
+                        <button type="submit" class="btn btn-default">登录</button>
                         <div class="input-field">
                             <a href="/user/login/github"><img src="/img/github.jpg" alt=""></a>
                             <a href="#"><img width="93" src="/img/wx.png" alt=""></a>

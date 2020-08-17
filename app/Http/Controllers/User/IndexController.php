@@ -34,7 +34,7 @@ class IndexController extends Controller
         // TODO 检测Email是否存在
 
         // TODO 验证用户名是否存在
-        
+
         //生成密码
         $password = password_hash($pass1,PASSWORD_BCRYPT);
 
@@ -57,6 +57,9 @@ class IndexController extends Controller
     }
 
 
+    /**
+     * 登录页面
+     */
     public function login(){
         if($_SERVER['uid']>0)       //已登录
         {
@@ -80,8 +83,8 @@ class IndexController extends Controller
         $email = $request->post('email');
         $pass = $request->post('pass');
 
-        //验证用户
-        $u = UserModel::where(['email'=>$email])->first();
+        //用户名 Email 登录
+        $u = UserModel::where(['email'=>$email])->orWhere(['user_name'=>$email])->first();
         //echo '<pre>';print_r($u->toArray());echo '</pre>';
 
         //验证密码
@@ -89,9 +92,18 @@ class IndexController extends Controller
         {
             //将登录信息保存至session
             session(['uid'=>$u->user_id]);      //将uid写进session
-            echo "登录成功";
+
+            $data = [
+                'redirect'  => '/',
+                'msg'       => "登录成功，正在跳转"
+            ];
+            return view('302',$data);
         }else{
-            echo "登录失败";
+            $data = [
+                'redirect'  => '/user/login',
+                'msg'       => "用户名或密码不正确，请重新登录"
+            ];
+            return view('302',$data);
         }
     }
 
