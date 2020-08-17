@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\UserModel;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 
 class IndexController extends Controller
@@ -90,13 +91,15 @@ class IndexController extends Controller
         //验证密码
         if( password_verify($pass,$u->password) )
         {
-            //将登录信息保存至session
-            session(['uid'=>$u->user_id]);      //将uid写进session
+            //执行登录
+            $token = UserModel::webLogin($u->user_id);
+            Cookie::queue('token',$token,120,'/');      //120分钟
 
             $data = [
                 'redirect'  => '/',
                 'msg'       => "登录成功，正在跳转"
             ];
+            
             return view('302',$data);
         }else{
             $data = [

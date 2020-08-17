@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 
 class UserModel extends Model
@@ -19,6 +20,30 @@ class UserModel extends Model
     {
         $str =  $uid . Str::random(5) . time() . mt_rand(1111,9999999);
         return strtoupper(substr(Str::random(5) . md5($str),1,20));
+    }
+
+    /**
+     * WEB登录
+     * @param $uid
+     */
+    public static function webLogin($uid)
+    {
+        $token = UserModel::generateToken($uid);
+        //服务器保存 token
+        $token_key = 'h:login_info:'.$token;
+        $login_info = [
+            'token'         => $token,                      // 用户token
+            'uid'           => $uid,                        // 用户主表 uid
+            'login_time'    => date('Y-m-d H:i:s'),    //登录时间
+            'login_ip'      => $_SERVER['REMOTE_ADDR'],     //客户端登录IP
+        ];
+        Redis::hMset($token_key,$login_info);
+        Redis::expire($token_key,7200);     // 登录有效期 2 个小时
+
+        //将 uid 与 token写入 seesion    （session使用Redis存储）
+        session(['uid'=>$uid]);
+
+        return $token;
     }
 
 }
