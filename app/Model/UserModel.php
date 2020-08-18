@@ -27,7 +27,7 @@ class UserModel extends Model
      * WEB登录
      * @param $uid
      */
-    public static function webLogin($uid)
+    public static function webLogin($uid,$user_name)
     {
         $token = UserModel::generateToken($uid);
         //服务器保存 token
@@ -35,6 +35,7 @@ class UserModel extends Model
         $login_info = [
             'token'         => $token,                      // 用户token
             'uid'           => $uid,                        // 用户主表 uid
+            'user_name'     => $user_name,                  // 用户名
             'login_time'    => date('Y-m-d H:i:s'),    //登录时间
             'login_ip'      => $_SERVER['REMOTE_ADDR'],     //客户端登录IP
         ];
@@ -42,7 +43,7 @@ class UserModel extends Model
         Redis::expire($token_key,7200);     // 登录有效期 2 个小时
 
         //将 uid 与 token写入 seesion    （session使用Redis存储）
-        session(['uid'=>$uid]);
+        session(['uid'=>$uid,'user_name'=>$user_name]);
 
         return $token;
     }

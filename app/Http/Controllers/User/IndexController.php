@@ -99,7 +99,7 @@ class IndexController extends Controller
         if( password_verify($pass,$u->password) )
         {
             //执行登录
-            $token = UserModel::webLogin($u->user_id);
+            $token = UserModel::webLogin($u->user_id,$u->user_name);
             Cookie::queue('token',$token,120,'/');      //120分钟
 
             $data = [
@@ -125,9 +125,18 @@ class IndexController extends Controller
 
        if( session()->has('uid') )
        {
-            echo "欢迎来到个人中心";
+           $data = [
+               'user_name'  => 'zhangsan'
+           ];
+           return view('user.center',$data);
+
        }else{
-           echo "请先登录";
+           $data = [
+               'redirect'   => '/user/login',
+               'msg'        => '请先登录'
+           ];
+
+           return view('302',$data);
        }
 
     }

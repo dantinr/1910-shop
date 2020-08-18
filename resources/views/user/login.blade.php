@@ -6,16 +6,9 @@
 
 @section('body')
     <!-- navbar top -->
-    <div class="navbar-top">
-        <!-- site brand	 -->
-        <div class="site-brand">
-            <a href="index.html"><h1>Mstore</h1></a>
-        </div>
-        <!-- end site brand	 -->
-        <div class="side-nav-panel-right">
-            <a href="#" data-activates="slide-out-right" class="side-nav-left"><i class="fa fa-user"></i></a>
-        </div>
-    </div>
+    @section('navbar_top')
+        @parent
+    @endsection
     <!-- end navbar top -->
 
     <!-- side nav right-->
@@ -44,6 +37,7 @@
                         <a href=""><h6>Forgot Password ?</h6></a>
                         <br>
                         <button type="submit" class="btn btn-default">登录</button>
+                        <a href="/user/reg" class="btn btn-default">注册</a>
                         <div class="input-field">
                             <a href="/user/login/github"><img src="/img/github.jpg" alt=""></a>
                             <a href="#"><img width="93" src="/img/wx.png" alt=""></a>
