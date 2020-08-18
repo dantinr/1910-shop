@@ -45,7 +45,12 @@
         <ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
             <li class="profil">
                 <img src="img/profile.jpg" alt="">
-                <h2>John Doe</h2>
+                @if($_SERVER['uid'])
+                    <h2>{{$_SERVER['user_name']}}</h2>
+                    @else
+                    <h2>未登录</h2>
+                @endif
+
             </li>
             <li><a href="about-us.html"><i class="fa fa-user"></i>About Us</a></li>
             <li><a href="contact.html"><i class="fa fa-envelope-o"></i>Contact Us</a></li>

@@ -24,11 +24,12 @@ class CheckLogin
         {
             $token = Crypt::decryptString($token);        //解密cookie
             $token_key = 'h:login_info:'.$token;
-            $uid = Redis::hGet($token_key,'uid');
+            $u = Redis::hGetAll($token_key);
 
-            if($uid)        // 登录有效
+            if(isset($u['uid']))        // 登录有效
             {
-                $_SERVER['uid'] = $uid;
+                $_SERVER['uid'] = $u['uid'];
+                $_SERVER['user_name'] = $u['user_name'];
             }
         }
 
