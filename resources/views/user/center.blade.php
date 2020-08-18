@@ -26,7 +26,7 @@
         <div class="register">
             <div class="row">
                 <div class="input-field col-md-3">
-                    当前账号： {{$user_name}} ({{$_SERVER['uid']}})
+                    当前账号： {{$_SERVER['user_name']}} ({{$_SERVER['uid']}})
                 </div>
                 <div class="input-field" id="git-user">
                     @if($status)

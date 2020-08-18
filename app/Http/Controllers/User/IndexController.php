@@ -144,7 +144,6 @@ class IndexController extends Controller
 
            $data = [
                'status'     => $status,
-               'user_name'  => 'zhangsan'
            ];
            return view('user.center',$data);
 
@@ -195,7 +194,9 @@ class IndexController extends Controller
      */
     public function bindGithub()
     {
-        echo __METHOD__;
+
+        $url = 'https://github.com/login/oauth/authorize?client_id='.env('OAUTH_GITHUB_ID').'&redirect_uri='.env('APP_URL').'/oauth/github?type=2'; //type=2为解绑账号
+        return redirect($url);
     }
 
     /**

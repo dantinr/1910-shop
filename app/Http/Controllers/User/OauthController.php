@@ -20,8 +20,14 @@ class OauthController extends Controller
     /**
      * github登录 回跳地址
      */
-    public function github()
+    public function github(Request $request)
     {
+
+        if(isset($_GET['type']) && $_GET['type']==2)        //绑定账号
+        {
+            return $this->bindGithub();
+        }
+
         // 接收code
         $code = $_GET['code'];
 
@@ -128,6 +134,43 @@ class OauthController extends Controller
         $this->token = $token;
         //将 uid 与 token写入 seesion    （session使用Redis存储）
         session(['uid'=>$uid]);
+
+    }
+
+    /**
+     * 绑定github账号
+     */
+    public function bindGithub(){
+        $code = $_GET['code'];
+        //获取token
+        $token = $this->getToken($code);
+        //获取用户信息
+        $u = $this->getGithubUserInfo($token);
+
+        //检查用户是否已存在 是否已绑定
+        $github_id = $u['id'];
+        $git_user = GithubUserModel::where(['guid'=>$github_id])->first();
+
+        if($git_user)       //用户已存在
+        {
+
+        }else{              // 新用户绑定
+            // 在 github 用户表中记录新用户
+            $info = [
+                'uid'                   =>  $_SERVER['uid'],       //作为本站新用户
+                'guid'                  =>  $u['id'],         //github用户id
+                'avatar'                =>  $u['avatar_url'],
+                'github_url'            =>  $u['html_url'],
+                'github_username'       =>  $u['name'],
+                'github_email'          =>  $u['email'],
+                'add_time'              =>  time(),
+            ];
+
+            GithubUserModel::insertGetId($info);        //插入新纪录
+        }
+
+        return redirect('/user/center');
+
 
     }
 }
