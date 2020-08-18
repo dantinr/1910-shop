@@ -169,7 +169,11 @@ class OauthController extends Controller
             GithubUserModel::insertGetId($info);        //插入新纪录
         }
 
-        return redirect('/user/center');
+        $data = [
+            'redirect'  => '/user/center',
+            'msg'       => '绑定成功'
+        ];
+        return view('302',$data);
 
 
     }
