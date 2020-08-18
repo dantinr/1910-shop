@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Model\GithubUserModel;
 use Illuminate\Http\Request;
 use App\Model\UserModel;
 use Illuminate\Support\Facades\Cookie;
@@ -125,7 +126,24 @@ class IndexController extends Controller
 
        if( session()->has('uid') )
        {
+
+           //检查第三方账号是否已绑定
+           $u = $this->checkGitUser($_SERVER['uid']);
+           if(empty($u))
+           {
+               $status = 0; //未绑定
+           }else{
+               if($u->is_bind==1)       //已绑定
+               {
+                   $status = 1; //已绑定
+               }else{
+                   $status = 0; //已绑定
+               }
+
+           }
+
            $data = [
+               'status'     => $status,
                'user_name'  => 'zhangsan'
            ];
            return view('user.center',$data);
@@ -170,6 +188,37 @@ class IndexController extends Controller
         return view('302',$data);
 
 
+    }
+
+    /**
+     * 绑定github账号
+     */
+    public function bindGithub()
+    {
+        echo __METHOD__;
+    }
+
+    /**
+     * 解绑绑github账号
+     */
+    public function unBindGithub()
+    {
+        GithubUserModel::where(['uid'=>$_SERVER['uid']])->update(['is_bind'=>0]);
+        $data = [
+            'errno' => 0,
+            'msg'   => 'ok'
+        ];
+        return response()->json($data);
+
+    }
+
+
+    /**
+     * 根据uid查询 git 用户信息
+     */
+    public function checkGitUser($uid)
+    {
+        return GithubUserModel::where(['uid'=>$uid])->first();
     }
 
 
