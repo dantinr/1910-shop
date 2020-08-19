@@ -18,28 +18,9 @@
     <!-- end side nav right-->
 
     <!-- navbar bottom -->
-    <div class="navbar-bottom">
-        <div class="row">
-            <div class="col s2">
-                <a href="/"><i class="fa fa-home"></i></a>
-            </div>
-            <div class="col s2">
-                <a href="/wishlist"><i class="fa fa-heart"></i></a>
-            </div>
-            <div class="col s4">
-                <div class="bar-center">
-                    <a href="/cart/index"><i class="fa fa-shopping-basket"></i></a>
-                    <span>{{\App\Model\CartModel::cartNum()}}</span>
-                </div>
-            </div>
-            <div class="col s2">
-                <a href="contact.html"><i class="fa fa-envelope-o"></i></a>
-            </div>
-            <div class="col s2">
-                <a href="#animatedModal2" id="nav-menu"><i class="fa fa-bars"></i></a>
-            </div>
-        </div>
-    </div>
+    @section('navbar_bottom')
+        @parent
+    @endsection
     <!-- end navbar bottom -->
 
     <!-- slider -->
@@ -152,7 +133,7 @@
                             <div class="price">
                                 ¥ {{$v->shop_price}} <span>¥ {{$v->shop_price}}</span>
                             </div>
-                            <button id="cart_add" value="{{$v['goods_id']}}" class="btn button-default">ADD TO CART</button>
+                            <button value="{{$v['goods_id']}}" class="btn button-default cart_add">ADD TO CART</button>
                         </div>
                     </div>
                 @endforeach
@@ -205,5 +186,24 @@
 
 @section('footerjs')
     @parent
-    <script src="/js/cart.js"></script>
+    <script>
+        $(".cart_add").click(function(e){
+            var gid = ($(this).val())
+            $.ajax({
+                url: '/cart/add?id=' + gid,
+                type: 'get',
+                dataType: 'json',
+                success:function(d){
+                    console.log(d);
+                    if(d.errno==0)
+                    {
+                        $.MessageBox("已加入购物车");
+                        var num = $("#cart_num").text();
+                        num++;      //可根据返回数据修改购物车数量
+                        $("#cart_num").text(num)
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

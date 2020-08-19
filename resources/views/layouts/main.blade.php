@@ -19,8 +19,10 @@
     <link rel="stylesheet" href="/css/fakeLoader.css">
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-message-box@3.2.2/dist/messagebox.min.css">
 
-    <link rel="shortcut icon" href="/img/favicon.png">
+
+        <link rel="shortcut icon" href="/img/favicon.png">
     @show
 
 </head>
@@ -81,7 +83,9 @@
             <div class="col s4">
                 <div class="bar-center">
                     <a href="/cart/index"><i class="fa fa-shopping-basket"></i></a>
-                    <span>{{\App\Model\CartModel::cartNum()}}</span>
+                    @if(\App\Model\CartModel::cartNum()>0)
+                        <span id="cart_num">{{\App\Model\CartModel::cartNum()}}</span>
+                    @endif
                 </div>
             </div>
             <div class="col s2">
@@ -113,6 +117,7 @@
 <script src="/js/fakeLoader.min.js"></script>
 <script src="/js/animatedModal.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-message-box@3.2.2/dist/messagebox.min.js"></script>
 @show
 
 </body>
