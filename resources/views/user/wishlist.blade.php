@@ -114,7 +114,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-message-box@3.2.2/dist/messagebox.min.js"></script>
 
     <script>
-        
+
     </script>
 @endsection
 
