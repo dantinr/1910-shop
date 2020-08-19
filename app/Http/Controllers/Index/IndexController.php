@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Index;
 
 use App\Http\Controllers\Controller;
+use App\Model\VideoModel;
 use Illuminate\Http\Request;
 use App\Model\GoodsModel;
 use Illuminate\Support\Facades\Cookie;
@@ -19,7 +20,13 @@ class IndexController extends Controller
         {
             $v['goods_title'] = $v['goods_name'];
             $v['goods_name'] = Str::limit($v['goods_name'],20);
+            //是否有视频
+            $video = VideoModel::where(['goods_id'=>$v['goods_id']])->first();
+            if($video){
+                $v['video'] = 1;
+            }
         }
+        
         $data = [
             'goods'  => $goods
         ];

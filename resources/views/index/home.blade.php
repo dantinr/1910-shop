@@ -129,11 +129,18 @@
                             <a target="_blank" href="/goods?id={{$v->goods_id}}" title="{{$v->goods_title}}">
                                 <img src="/storage/{{$v->goods_img}}" alt="">
                             </a>
-                            <h6><a target="_blank" title="{{$v->goods_title}}" href="/goods?id={{$v->goods_id}}">{{$v->goods_name}}</a></h6>
+                            <h6><a target="_blank" title="{{$v->goods_title}}" href="/goods?id={{$v->goods_id}}">
+                                    @if($v->video)
+                                    <a href="#"><i class="fa fa-video-camera"></i></a>
+                                    @endif
+                                    {{$v->goods_name}}
+                                </a>
+                            </h6>
                             <div class="price">
                                 ¥ {{$v->shop_price}} <span>¥ {{$v->shop_price}}</span>
                             </div>
                             <button value="{{$v['goods_id']}}" class="btn button-default cart_add">ADD TO CART</button>
+
                         </div>
                     </div>
                 @endforeach
