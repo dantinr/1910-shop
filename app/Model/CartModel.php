@@ -33,4 +33,21 @@ class CartModel extends Model
         $key2 = 'ss:cart:goods_num:'.$uuid;     //商品个数
         Redis::del($key1,$key2);
     }
+
+    /**
+     * 购物车商品数量
+     */
+    public static function cartNum()
+    {
+        $uuid = $_COOKIE['uuid'];
+        $key = 'ss:cart:goods_num:'.$uuid;     //商品个数
+
+        $total = 0;
+        $list = Redis::zrange($key,0,-1,['withscores'=>true]);
+        if($list)
+        {
+            $total = array_sum($list);
+        }
+        return $total;
+    }
 }

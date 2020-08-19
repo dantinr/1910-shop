@@ -29,7 +29,7 @@
             <div class="col s4">
                 <div class="bar-center">
                     <a href="/cart/index"><i class="fa fa-shopping-basket"></i></a>
-                    <span>2</span>
+                    <span>{{\App\Model\CartModel::cartNum()}}</span>
                 </div>
             </div>
             <div class="col s2">
@@ -152,7 +152,7 @@
                             <div class="price">
                                 ¥ {{$v->shop_price}} <span>¥ {{$v->shop_price}}</span>
                             </div>
-                            <button class="btn button-default">ADD TO CART</button>
+                            <button id="cart_add" value="{{$v['goods_id']}}" class="btn button-default">ADD TO CART</button>
                         </div>
                     </div>
                 @endforeach
@@ -205,4 +205,5 @@
 
 @section('footerjs')
     @parent
+    <script src="/js/cart.js"></script>
 @endsection

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redis;
 use DB;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
+use App\Model\CartModel;
 
 class TestController extends Controller
 {
@@ -15,6 +16,7 @@ class TestController extends Controller
     public function test1()
     {
 
+        CartModel::cartNum();die;
 
         $url = 'https://api.github.com/user';
         $token = '7e59cb7e5c0debab9b77472e6c33b73bc16c62ee';
