@@ -4,10 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Model\GithubUserModel;
+use App\Model\GoodsModel;
 use Illuminate\Http\Request;
 use App\Model\UserModel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
 {
@@ -222,5 +224,37 @@ class IndexController extends Controller
         return GithubUserModel::where(['uid'=>$uid])->first();
     }
 
+
+    /**
+     * 收藏列表
+     */
+    public function wishList()
+    {
+        if($_SERVER['uid']==0){     //未登录
+            return view('302',['redirect'=>'/user/login','msg'=>'请先登录']);
+        }
+
+        //已登录
+        $redis_fav_key = 'ss:fav_goods:'.$_SERVER['uid'];       //用户收藏列表
+        $list = Redis::zRevRange($redis_fav_key,0,-1,true);
+
+        if(empty($list))        //收藏为空
+        {
+            return view('302',['redirect'=>'/','msg'=>'收藏为空']);
+        }
+
+        foreach($list as $k=>$v)
+        {
+            $g = GoodsModel::detail($k);
+            $g['fav_time'] = date('Y-m-d H:i:s',$v);        //收藏时间
+            $goods[] = $g;
+        }
+
+        $data = [
+            'goods'  => $goods
+        ];
+        return view('user.wishlist',$data);
+
+    }
 
 }

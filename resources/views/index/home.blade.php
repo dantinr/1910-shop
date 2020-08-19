@@ -24,7 +24,7 @@
                 <a href="/"><i class="fa fa-home"></i></a>
             </div>
             <div class="col s2">
-                <a href="wishlist.html"><i class="fa fa-heart"></i></a>
+                <a href="/user/wishlist"><i class="fa fa-heart"></i></a>
             </div>
             <div class="col s4">
                 <div class="bar-center">

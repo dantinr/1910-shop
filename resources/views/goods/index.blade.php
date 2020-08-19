@@ -26,7 +26,7 @@
                 <a href="index.html"><i class="fa fa-home"></i></a>
             </div>
             <div class="col s2">
-                <a href="wishlist.html"><i class="fa fa-heart"></i></a>
+                <a href="wishlist"><i class="fa fa-heart"></i></a>
             </div>
             <div class="col s4">
                 <div class="bar-center">
@@ -340,8 +340,14 @@
                 type: "get",
                 dataType: 'json',
                 success: function(d){
-                    $.MessageBox("收藏成功");
-                    $("#fav").text("已收藏")
+                    if(d.error==0)
+                    {
+                        $.MessageBox("收藏成功");
+                        $("#fav").text("已收藏")
+                    }else{
+                        $.MessageBox(d.msg);
+                    }
+
                 }
             });
         });

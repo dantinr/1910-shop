@@ -14,5 +14,5 @@ var uuid = Cookies.get('uuid')      // https://github.com/js-cookie/js-cookie
 
 //生成客户端唯一标识
 if(uuid == undefined){
-    Cookies.set('uuid',randomStr(16),{ expires: 99, path: '' })
+    Cookies.set('uuid',randomStr(16),{ expires: 99, path: '/' })
 }

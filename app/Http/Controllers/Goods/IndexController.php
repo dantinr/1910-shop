@@ -103,9 +103,16 @@ class IndexController extends Controller
     public function fav(Request $request)
     {
 
-        //判断登录 (可在中间件中做)
+        if($_SERVER['uid']==0)      //未登录
+        {
+            $response = [
+                'errno' => 400001,
+                'msg'   => '未登录，请先登录',
+            ];
+            return $response;
+        }
 
-        $uid = 8888;
+        $uid = $_SERVER['uid'];
         $goods_id = $request->get('id',0);                //商品ID
 
         //判断商品是否存在

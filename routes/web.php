@@ -26,6 +26,7 @@ Route::get('/oauth/github','User\OauthController@github');           //github授
 Route::get('/user/center','User\IndexController@center');            //用户中心
 Route::get('/user/bind/github','User\IndexController@bindGithub');   //绑定github账号
 Route::get('/user/unbind/github','User\IndexController@unBindGithub');   //解绑绑github账号
+Route::get('/wishlist','User\IndexController@wishList');   //收藏列表
 
 Route::get('/goods','Goods\IndexController@index');            //商品详情
 
