@@ -39,15 +39,19 @@ class CartModel extends Model
      */
     public static function cartNum()
     {
-        $uuid = $_COOKIE['uuid'];
-        $key = 'ss:cart:goods_num:'.$uuid;     //商品个数
-
         $total = 0;
-        $list = Redis::zrange($key,0,-1,['withscores'=>true]);
-        if($list)
+        if(isset($_COOKIE['uuid']))
         {
-            $total = array_sum($list);
+            $key = 'ss:cart:goods_num:'.$_COOKIE['uuid'];     //商品个数
+
+            $total = 0;
+            $list = Redis::zrange($key,0,-1,['withscores'=>true]);
+            if($list)
+            {
+                $total = array_sum($list);
+            }
         }
+
         return $total;
     }
 }
