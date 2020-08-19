@@ -33,7 +33,7 @@
                             <h5>图片</h5>
                         </div>
                         <div class="col s7">
-                            <img src="img/wishlist1.png" alt="">
+                            <img src="/storage/{{$v['goods_img']}}" alt="">
                         </div>
                     </div>
                     <div class="row">
@@ -49,7 +49,7 @@
                             <h5>售价</h5>
                         </div>
                         <div class="col s7">
-                            <h5>人民币{{$v['shop_price']}}</h5>
+                            <h5>￥{{$v['shop_price']}}</h5>
                         </div>
                     </div>
                     <div class="row">
