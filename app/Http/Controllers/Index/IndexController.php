@@ -26,7 +26,7 @@ class IndexController extends Controller
                 $v['video'] = 1;
             }
         }
-        
+
         $data = [
             'goods'  => $goods
         ];

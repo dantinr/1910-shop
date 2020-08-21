@@ -126,7 +126,7 @@ class IndexController extends Controller
     public function center()
     {
 
-       if( session()->has('uid') )
+       if( $_SERVER['uid'] )
        {
 
            //检查第三方账号是否已绑定
