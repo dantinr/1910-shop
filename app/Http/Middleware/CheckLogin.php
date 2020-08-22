@@ -25,19 +25,21 @@ class CheckLogin
         $current_uri = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $_SERVER['current_url'] = $current_uri;
 
+        //查询 passport token是否有效
         if($token)
         {
-            $token_key = 'h:login_info:'.$token;
-            $u = Redis::hGetAll($token_key);
-
-            if(isset($u['uid']))        // 登录有效
+            $url = env("PASSPORT_HOST") . '/web/check/token?token='.$token;
+            $res = file_get_contents($url);
+            $data = json_decode($res,true);
+            
+            if($data['errno']==0)       //token有效
             {
-                $_SERVER['uid'] = $u['uid'];
-                $_SERVER['user_name'] = $u['user_name'];
+                $_SERVER['uid'] = $data['data']['u']['uid'];
+                $_SERVER['user_name'] = $data['data']['u']['user_name'];
                 $_SERVER['token'] = $token;
             }
-        }
 
+        }
 
         return $next($request);
     }
