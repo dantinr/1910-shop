@@ -13,7 +13,7 @@
 
 Route::get('/test1','TestController@test1');
 
-Route::get('/','Index\IndexController@home');       //首页
+Route::get('/','Index\IndexController@home')->middleware('check.mobile');       //首页
 
 Route::get('/user/reg','User\IndexController@reg');            //注册
 Route::post('/user/reg','User\IndexController@regDo');            //注册
