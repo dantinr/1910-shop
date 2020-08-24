@@ -45,6 +45,8 @@ Route::prefix('/cart')->group(function(){
     Route::get('/del','Cart\IndexController@del');              //删除
 });
 
+Route::get('/chat','Chat\IndexController@index');           //聊天室
+
 //订单
 Route::prefix('/order')->group(function(){
     Route::get('/create','Order\IndexController@create');      //生成订单
@@ -65,7 +67,6 @@ Route::prefix('/pay')->group(function(){
 Route::prefix('/cron')->group(function(){
     Route::get('/codec','Cron\VideoCron@codec');            //定时转码
 });
-
 
 
 

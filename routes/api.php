@@ -19,3 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //首页商品
 Route::get('/goods/index','Api\GoodsController@home');
+Route::get('/xxx',function(){
+    echo 2222;
+});
+
