@@ -16,25 +16,25 @@
 
 
 <script src="/js/jquery.min.js"></script>
+<script src="/js/js.cookie-2.2.1.min.js"></script>
 <script>
-
 
     var url = 'ws://ws.1910.com';       //websocket 服务器地址
     var ws = new WebSocket(url);
-    ws.onopen = function(){
-        console.log('open');
+    var user_name = Cookies.get('u')
+    console.log(user_name);
 
+    ws.onopen = function(){
         //点击发送
         $("#btn_msg").on('click',function(){
-            var msg = $("#msg").val();
-            ws.send(msg);
+            ws.send($("#msg").val());
         });
 
     }
     //接收服务器响应
     ws.onmessage = function(d){
-        console.log(d.data);
-        $("#rev_cont").append(d.data + "\n")
+        $("#rev_cont").append( "[" + user_name + "]: "  + d.data + "\n")
+        $("#msg").val("")
     }
 
 

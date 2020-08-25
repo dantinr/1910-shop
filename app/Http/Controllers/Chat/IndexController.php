@@ -14,6 +14,13 @@ class IndexController extends Controller
      */
     public function index()
     {
+        if($_SERVER['uid']==0){
+            $data = [
+                'redirect'  => '/user/login',
+                'msg'       => "请先登录"
+            ];
+            return view('302',$data);
+        }
         return view('chat.index');
     }
 }
