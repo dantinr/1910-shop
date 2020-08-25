@@ -9,7 +9,9 @@
 <h1>Websocket 聊天室</h1>
 
 
-<textarea name="" id="rev_cont" cols="100" rows="20"></textarea>
+<div id="rev_cont">
+
+</div>
 <hr>
 <input type="text" id="msg" style="width: 300px;height: 30px">
 <input type="button" id="btn_msg" style="width:100px;height: 30px" value="发送">
@@ -33,7 +35,7 @@
     }
     //接收服务器响应
     ws.onmessage = function(d){
-        $("#rev_cont").append( "[" + user_name + "]: "  + d.data + "\n")
+        $("#rev_cont").append( "<p>" + "[" + user_name + "]: "  + d.data + "</p>" )
         $("#msg").val("")
     }
 
