@@ -69,6 +69,8 @@ Route::prefix('/cron')->group(function(){
 });
 
 
+Route::get('/prize','Prize\IndexController@index');         //抽奖
+
 
 
 
